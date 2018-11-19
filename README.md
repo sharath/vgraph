@@ -1,2 +1,4 @@
 # vgraph
-Make Graphs Visual Again
+
+Simple Graph Visualization and Animation Library.
+
