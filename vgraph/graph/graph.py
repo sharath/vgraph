@@ -1,4 +1,4 @@
-from collections import deque
+from collections import deque, namedtuple
 from ..viz import Monitor
 from .vertex import Vertex
 from .edge import Edge
@@ -12,8 +12,13 @@ class Graph:
         self._vertices = {}
         self._monitor = monitor
         self._gmonitor = GraphMonitor(self) if monitor else None
-        if self._monitor:
-            self._gmonitor.record()
+    
+    def show(self):
+        pass
+    
+    def render(self):
+        assert self._monitor
+        return self._gmonitor.render()
 
         
     def add_edge(self, a, b, **kwargs):
@@ -41,14 +46,16 @@ class Graph:
             
     def save(self):
         pass
-    
+
     
 class GraphMonitor(Monitor):
     def __init__(self, g):
+        super(GraphMonitor, self).__init__()
         self._g = g
-        self._recording = deque()
+        self._frame = namedtuple('frame', ('step', 'alist', 'vertices'))
 
     def record(self):
-        self._recording.append()
+        self._it += 1
+        self._recording.append(self._frame(self._it, dict(self._g._alist), dict(self._g._vertices)))
         
 

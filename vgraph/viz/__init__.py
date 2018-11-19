@@ -1,8 +1,11 @@
-from abc import ABC
+from abc import ABC, abstractmethod
+from collections import deque
 
 class Monitor(ABC):
-    pass
-    
-# going to reconsider how to do this    
-class Renderer:
-    pass
+    def __init__(self):
+        self._it = 0
+        self._recording = deque()
+
+    @abstractmethod
+    def render(self):
+        raise UnimplementedError
