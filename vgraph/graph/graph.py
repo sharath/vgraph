@@ -18,7 +18,7 @@ class Graph:
         self._vertices = {}
         self._monitor = monitor
         self._gmonitor = GraphMonitor(self) if monitor else None
-        self.figsize = (10, 10)
+        self.figsize = kwargs.get('figsize', (10, 10))
         self.xmin, self.xmax = -1, 1
         self.ymin, self.ymax = -1, 1
         
