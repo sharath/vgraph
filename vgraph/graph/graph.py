@@ -34,15 +34,17 @@ class Graph:
         ax.set_xlim((min(self.ymin, self.xmin), max(self.ymax, self.xmax)))
         ax.set_ylim((min(self.ymin, self.xmin), max(self.ymax, self.xmax)))
         
-        
-        
         for name, v in self._vertices.items():
             vx, vy = v.position
-            c = Circle((vx, vy), v.radius)
+            c = Circle((vx, vy), v.radius, zorder=20)
             c.set_edgecolor(v.rcolor)
             c.set_facecolor(v.color)
-            ax.annotate(name, xy=(vx, vy), fontsize=v.tsize, ha='center', xytext=(vx+tsx, vy+tsy), color=v.tcolor)
+            ax.annotate(name, xy=(vx, vy), fontsize=v.tsize, ha='center', xytext=(vx+tsx, vy+tsy), color=v.tcolor, zorder=21)
             ax.add_artist(c)
+            
+            for e in self._alist[name]:
+                l = ConnectionPatch(e.a.position, e.b.position, 'data')
+                ax.add_artist(l)
 
         plt.close()
         return fig
