@@ -1,6 +1,8 @@
 import numpy as np
 from abc import ABC, abstractmethod
 
+from ..viz import Monitor
+
 class Vertex:
     def __init__(self):
         pass
@@ -27,4 +29,8 @@ class DirectedGraph(Graph):
 class WeightedDirectedGraph(Graph):
     pass
 class WeightedUndirectedGraph(Graph):
+    pass
+
+
+class GraphMonitor(Monitor):
     pass
